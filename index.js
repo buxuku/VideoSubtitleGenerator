@@ -2,12 +2,14 @@ import fs from 'fs';
 import { execSync } from 'child_process';
 import { config } from 'dotenv';
 import app from './translate.js';
-import { sourceSrtSaveName, translateServiceProvider, videoDir, whisperModel, whisperPath } from './config.js';
-import { extractAudio, renderFilePath } from './utils.js';
+import { sourceSrtSaveName, translateServiceProvider, videoDir, whisperModel } from './config.js';
+import { extractAudio, renderFilePath, installWhisper } from './utils.js';
 
 config();
 
 const { log, error } = console;
+
+await installWhisper();
 fs.readdir(videoDir, async (err, files) => {
   if (err) {
     error(err);
@@ -24,7 +26,9 @@ fs.readdir(videoDir, async (err, files) => {
         await extractAudio(`${videoDir}/${file}`, `${wavFile}`);
         //execSync(`ffmpeg -v quiet -stats -i "${videoDir}/${file}" -ar 16000 -ac 1 -c:a pcm_s16le -y "${wavFile}"`);
         log('完成音频文件提取， 准备生成字幕文件');
-        execSync(`${whisperPath}/main -m ${whisperPath}/models/${whisperModel} -f "${wavFile}" -osrt -of "${srtFile}"`);
+        execSync(
+          `./whisper.cpp/main -m ./whisper.cpp/models/ggml-${whisperModel}.bin -f "${wavFile}" -osrt -of "${srtFile}"`,
+        );
         log('完成字幕文件生成， 准备开始翻译');
         if (translateServiceProvider) {
           await app(videoDir, fileName, `${srtFile}.srt`);

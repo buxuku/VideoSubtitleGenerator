@@ -21,8 +21,8 @@ const fetchApi = service.createAPI("TranslateText", {
 
 export default  async function translate(query) {
     const postBody = {
-        SourceLanguage: translateConfig.source_lang,
-        TargetLanguage: translateConfig.target_lang,
+        SourceLanguage: translateConfig.sourceLanguage,
+        TargetLanguage: translateConfig.targetLanguage,
         TextList: [query],
     };
     try {

@@ -11,8 +11,8 @@ export default async function baidu(query) {
        q: query,
        appid,
        salt,
-       from: translateConfig.source_lang,
-       to: translateConfig.target_lang,
+       from: translateConfig.sourceLanguage,
+       to: translateConfig.targetLanguage,
        sign
    }
    const res = await axios.post('https://fanyi-api.baidu.com/api/trans/vip/translate', data, {

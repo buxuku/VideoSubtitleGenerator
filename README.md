@@ -36,22 +36,17 @@
 - 自定义字幕文件名，方便兼容不同的播放器挂载字幕识别
 - 自定义翻译后的字幕文件内容，纯翻译结果，原字幕+翻译结果
 - 使用 whisper.cpp， 对 apple silicon 进行了优化，有较快的生成速度
+- 项目集成了 `fluent-ffmpeg`, 无须安装 `ffmpeg`
 
 ##### 🔦使用
 
-1️⃣手动在本地安装好 whisper.cpp, 参考 https://github.com/ggerganov/whisper.cpp
+1️⃣ 手动在本地安装好 whisper.cpp, 参考 https://github.com/ggerganov/whisper.cpp
 
-2️⃣手动在本地安装好 ffmpeg , 可通过 brew 来安装 
+2️⃣ 克隆本项目在本地
 
-```shell
-brew install ffmpeg
-```
+3️⃣ 在项目中执行 `yarn install` 或者 `npm install`
 
-3️⃣克隆本项目在本地
-
-4️⃣在项目中执行 `yarn install` 或者 `npm install`
-
-5️⃣复制 `.env.local` 为 `.env` 在项目根目录，访文件用于配置翻译相关的 KEY 和 SECRET， 例如
+4️⃣ 复制 `.env.local` 为 `.env` 在项目根目录，访文件用于配置翻译相关的 KEY 和 SECRET， 例如
 
 ```shell
 BAIDU_KEY=2023120600190xxxx
@@ -60,7 +55,7 @@ VOLC_KEY=AKLTMDUwZjY4MTZkNTFmN4M3ZjlkMzlmYzAzMTdlMDExxxx
 VOLC_SECRET=T0dRMllUUmpPREUzWWpjNE5HVm2Zamt4TlRObU9EUm1ORFk0T1dGbExxxx==
 ```
 
-6️⃣其余的配置在 `config.js` 文件中进行配置，
+5️⃣ 其余的配置在 `config.js` 文件中进行配置，
 
 ```js
 // 视频文件所在目录 如 /Users/demo/video
@@ -174,4 +169,4 @@ export const targetSrtSaveName = '${fileName}.${targetLanguage}';
  resonate with other things that you've already heard and I'll try to make some connections
 ```
 
-7️⃣配置好该文件之后，执行 `yarn start` 或者 `npm start`
+6️⃣ 配置好该文件之后，执行 `yarn start` 或者 `npm start`

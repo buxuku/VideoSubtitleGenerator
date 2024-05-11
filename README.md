@@ -35,18 +35,32 @@
 - 支持 deeplx 翻译 （批量翻译容易存在被限流的情况）
 - 自定义字幕文件名，方便兼容不同的播放器挂载字幕识别
 - 自定义翻译后的字幕文件内容，纯翻译结果，原字幕+翻译结果
-- 使用 whisper.cpp， 对 apple silicon 进行了优化，有较快的生成速度
+- 项目集成 `whisper.cpp`， 它对 apple silicon 进行了优化，有较快的生成速度
 - 项目集成了 `fluent-ffmpeg`, 无须安装 `ffmpeg`
+
+##### ⬆️ 支持的模型
+
+```
+tiny.en
+tiny
+base.en
+base
+small.en
+small
+medium.en
+medium
+large-v1
+large-v2
+large-v3
+```
 
 ##### 🔦使用
 
-1️⃣ 手动在本地安装好 whisper.cpp, 参考 https://github.com/ggerganov/whisper.cpp
+1️⃣ 克隆本项目在本地
 
-2️⃣ 克隆本项目在本地
+2️⃣ 在项目中执行 `yarn install` 或者 `npm install`
 
-3️⃣ 在项目中执行 `yarn install` 或者 `npm install`
-
-4️⃣ 复制 `.env.local` 为 `.env` 在项目根目录，访文件用于配置翻译相关的 KEY 和 SECRET， 例如
+3️⃣ 复制 `.env.local` 为 `.env` 在项目根目录，访文件用于配置翻译相关的 KEY 和 SECRET， 例如
 
 ```shell
 BAIDU_KEY=2023120600190xxxx
@@ -55,17 +69,27 @@ VOLC_KEY=AKLTMDUwZjY4MTZkNTFmN4M3ZjlkMzlmYzAzMTdlMDExxxx
 VOLC_SECRET=T0dRMllUUmpPREUzWWpjNE5HVm2Zamt4TlRObU9EUm1ORFk0T1dGbExxxx==
 ```
 
-5️⃣ 其余的配置在 `config.js` 文件中进行配置，
+4️⃣ 其余的配置在 `config.js` 文件中进行配置，
 
 ```js
 // 视频文件所在目录 如 /Users/demo/video
 export const videoDir = './examples';
 
-// whisper.cpp 代码路径 如 /Users/demo/code/github.com/ggerganov/whisper.cpp
-export const whisperPath = '/Users/xiaodong/code/github.com/ggerganov/whisper.cpp';
-
-// whisper.cpp 模型
-export const whisperModel = 'ggml-medium.bin';
+/*
+whisper.cpp 模型 支持以下
+tiny.en
+tiny
+base.en
+base
+small.en
+small
+medium.en
+medium
+large-v1
+large-v2
+large-v3
+ */
+export const whisperModel = 'base.en';
 
 // 翻译配置，原语言与目标语言
 export const translateConfig = {
@@ -169,4 +193,4 @@ export const targetSrtSaveName = '${fileName}.${targetLanguage}';
  resonate with other things that you've already heard and I'll try to make some connections
 ```
 
-6️⃣ 配置好该文件之后，执行 `yarn start` 或者 `npm start`
+5️⃣ 配置好该文件之后，执行 `yarn start` 或者 `npm start`, 首次执行会下载 `whisper.cpp` 和配置的对应的模型文件，会比较慢一些。下次执行将会跳过该流程

@@ -4,11 +4,21 @@ config();
 // 视频文件所在目录 如 /Users/demo/video
 export const videoDir = './examples';
 
-// whisper.cpp 代码路径 如 /Users/demo/code/github.com/ggerganov/whisper.cpp
-export const whisperPath = '/Users/xiaodong/code/github.com/ggerganov/whisper.cpp';
-
-// whisper.cpp 模型
-export const whisperModel = 'ggml-medium.bin';
+/*
+whisper.cpp 模型 支持以下
+tiny.en
+tiny
+base.en
+base
+small.en
+small
+medium.en
+medium
+large-v1
+large-v2
+large-v3
+ */
+export const whisperModel = 'base.en';
 
 // 翻译配置，原语言与目标语言
 export const translateConfig = {

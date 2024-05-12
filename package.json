@@ -12,6 +12,7 @@
   "author": "buxuku",
   "license": "ISC",
   "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@volcengine/openapi": "^1.14.0",
     "axios": "^1.6.2",
     "crypto": "^1.0.1",

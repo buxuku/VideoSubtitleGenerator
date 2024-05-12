@@ -1,8 +1,11 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
 import path from 'path';
+import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
 import ffmpeg from 'fluent-ffmpeg';
 import { translateConfig, videoDir, whisperModel } from './config.js';
+
+ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
 // 将字符串转成模板字符串
 export const renderTemplate = (template, data) => {

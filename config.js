@@ -1,6 +1,3 @@
-import { config } from 'dotenv';
-config();
-
 // 视频文件所在目录 如 /Users/demo/video
 export const videoDir = './examples';
 
@@ -20,24 +17,13 @@ large-v3
  */
 export const whisperModel = 'base.en';
 
-// 翻译配置，原语言与目标语言
+// 翻译配置，视频原语言与翻译后的目标语言
 export const translateConfig = {
   sourceLanguage: 'en',
   targetLanguage: 'zh',
 };
 
-// 百度翻译配置
-export const baiduConfig = {
-  appid: process.env.BAIDU_KEY,
-  key: process.env.BAIDU_SECRET,
-};
-
-// 火山引擎翻译配置
-export const volcConfig = {
-  accessKeyId: process.env.VOLC_KEY,
-  secretKey: process.env.VOLC_SECRET,
-};
-
+// 支持的翻译服务商
 export const supportedService = {
   baidu: Symbol.for('baidu'),
   volc: Symbol.for('volc'),

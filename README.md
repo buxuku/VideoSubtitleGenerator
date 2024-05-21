@@ -1,6 +1,13 @@
-# 批量为视频文件生成字幕文件，并翻译成其它语言
+# 批量为视频生成字幕文件，并翻译成其它语言
 
-> 这只是方便自己使用的一个小工具，目前并未进行严格测试，如果在使用过程中遇到啥问题，可以提 Issue 或者通过 Discussions 进行讨论
+> [!IMPORTANT]  
+> 🧨 💥 🎉 本项目是一个命令行工具，但非常荣幸得到了很多朋友的支持，也给我了很大的鼓舞，因此，我基于它制作了一款客户端工具，让大家能够更加方便地使用，也方便一部分不熟悉代码配置的朋友也能使用该工具。
+> 
+> 欢迎大家移步 [video-subtitle-master](https://github.com/buxuku/video-subtitle-master) 以获得更加便捷的使用体验
+> ![image](https://github.com/buxuku/VideoSubtitleGenerator/assets/7866330/8dc48869-2489-46e3-8691-f30f00b24e70)
+
+
+
 
 > [!NOTE]
 > 本项目基于 macOS, node 环境运行，暂未兼容 windows 环境
@@ -59,7 +66,7 @@ large-v3
 
 本项目的翻译能力是基于 **百度/火山/deeplx** 的翻译API来实现的，这些 API 的使用需要申请对的 KEY 和 SECRET， 因此，如果你需要使用到翻译服务，需要先申请一个 API 。
 
-具体的申请方法，可以参考 https://bobtranslate.com/service/， 感谢 [Bob](https://bobtranslate.com/) 这款优秀的软件。
+具体的申请方法，可以参考 https://bobtranslate.com/service/ ， 感谢 [Bob](https://bobtranslate.com/) 这款优秀的软件。
 
 ## 🔦使用
 
@@ -226,3 +233,5 @@ export const contentTemplateRule = contentTemplateRuleMap.onlyTranslate;
 ```
 
 5️⃣ 配置好该文件之后，执行 `yarn start` 或者 `npm start`, 首次执行会下载 `whisper.cpp` 和配置的对应的模型文件，会比较慢一些。下次执行将会跳过该流程
+
+如果在使用过程中遇到啥问题，可以提 Issue 或者通过 Discussions 进行讨论

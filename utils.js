@@ -1,5 +1,6 @@
 import { spawn } from 'child_process';
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import ffmpegInstaller from '@ffmpeg-installer/ffmpeg';
 import ffmpeg from 'fluent-ffmpeg';
@@ -36,7 +37,7 @@ export const extractAudio = (videoPath, audioPath) => {
         console.log('转换任务开始~', str);
       })
       .on('progress', function (progress) {
-        console.log('进行中，完成' + progress.percent + '%');
+        console.log(`进行中，完成${(progress.percent || 0)}%`);
       })
       .on('end', function (str) {
         console.log('转换任务完成!');
@@ -72,6 +73,11 @@ function runCommand(command, args) {
   });
 }
 
+export const isDarwin = () => os.platform() === 'darwin';
+
+export const isWin32 = () => os.platform() === 'win32';
+
+
 // 安装 whisper.cpp 及模型
 export const installWhisper = async () => {
   const repoUrl = 'https://github.com/ggerganov/whisper.cpp';
@@ -84,10 +90,19 @@ export const installWhisper = async () => {
     await runCommand('git', ['clone', repoUrl]);
   }
   if (!fs.existsSync(modelPath)) {
+    let script;
     console.log('正在安装 whisper.cpp 模型');
-    await runCommand('bash', ['./whisper.cpp/models/download-ggml-model.sh', whisperModel]);
+    if (isDarwin()) {
+      script = path.join('./', './whisper/models/download-ggml-model.sh');
+      await runCommand('bash', [script, whisperModel]);
+    } else if (isWin32()) {
+      script = path.join('./', 'whisper.cpp/models/download-ggml-model.cmd');
+      await runCommand('cmd.exe', ['/c', script, whisperModel])
+    } else {
+      throw Error('platform does not support! ')
+    }
   }
-  if (!fs.existsSync(mainPath)) {
+  if (isDarwin() && !fs.existsSync(mainPath)) {
     // 编译 whisper.cpp
     console.log('正在编译 whisper.cpp');
     await runCommand('make', ['-C', './whisper.cpp']);

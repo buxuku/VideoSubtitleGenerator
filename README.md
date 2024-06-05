@@ -7,11 +7,6 @@
 > ![image](https://github.com/buxuku/VideoSubtitleGenerator/assets/7866330/8dc48869-2489-46e3-8691-f30f00b24e70)
 
 
-
-
-> [!NOTE]
-> 本项目基于 macOS, node 环境运行，暂未兼容 windows 环境
-
 做这个小工具的初衷：
 
 自己有一大批外文视频，没有字幕，希望能够添加字幕文件，同时也能够将字幕文件翻译成中文， 同时希望能够通过批量处理的方式来减轻工作量。

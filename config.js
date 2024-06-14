@@ -18,6 +18,7 @@ large-v3
 export const whisperModel = 'base.en';
 
 // 翻译配置，视频原语言与翻译后的目标语言
+// 语言列表可参考 https://fanyi-api.baidu.com/api/trans/product/apidoc
 export const translateConfig = {
   sourceLanguage: 'en',
   targetLanguage: 'zh',

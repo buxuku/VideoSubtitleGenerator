@@ -3,7 +3,7 @@ import path from 'path';
 import { execSync } from 'child_process';
 import { config } from 'dotenv';
 import app from './translate.js';
-import { sourceSrtSaveName, translateServiceProvider, videoDir, whisperModel } from './config.js';
+import { sourceSrtSaveName, translateServiceProvider, videoDir, translateConfig ,whisperModel } from './config.js';
 import { extractAudio, renderFilePath, installWhisper, isDarwin, isWin32 } from './utils.js';
 
 config();
@@ -32,7 +32,7 @@ fs.readdir(videoDir, async (err, files) => {
           mainPath = path.join('./', 'whisper-bin-x64/main.exe');
         }
         execSync(
-          `${mainPath} -m ./whisper.cpp/models/ggml-${whisperModel}.bin -f "${wavFile}" -osrt -of "${srtFile}"`
+          `${mainPath} -m ./whisper.cpp/models/ggml-${whisperModel}.bin -f "${wavFile}" -osrt -of "${srtFile}" -l ${translateConfig.sourceLanguage}`
         )
         log('完成字幕文件生成， 准备开始翻译');
         if (translateServiceProvider) {

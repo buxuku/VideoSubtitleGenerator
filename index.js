@@ -28,7 +28,7 @@ fs.readdir(videoDir, async (err, files) => {
         //execSync(`ffmpeg -v quiet -stats -i "${videoDir}/${file}" -ar 16000 -ac 1 -c:a pcm_s16le -y "${wavFile}"`);
         log('完成音频文件提取， 准备生成字幕文件');
         let mainPath = path.join('./', 'whisper.cpp/main');
-        if(isWin32){
+        if(isWin32()){
           mainPath = path.join('./', 'whisper-bin-x64/main.exe');
         }
         execSync(

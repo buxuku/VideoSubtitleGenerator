@@ -93,7 +93,7 @@ export const installWhisper = async () => {
     let script;
     console.log('正在安装 whisper.cpp 模型');
     if (isDarwin()) {
-      script = path.join('./', './whisper/models/download-ggml-model.sh');
+      script = path.join('./', './whisper.cpp/models/download-ggml-model.sh');
       await runCommand('bash', [script, whisperModel]);
     } else if (isWin32()) {
       script = path.join('./', 'whisper.cpp/models/download-ggml-model.cmd');

@@ -34,6 +34,10 @@ export default async function translate(folder, fileName, absolutePath) {
             const deeplx = await import('./service/deeplx.js');
             text = await deeplx.default(source);
             break;
+          case supportedService.ollama:
+            const ollama = await import('./service/ollama.js');
+            text = await ollama.default(source, translateConfig.sourceLanguage, translateConfig.targetLanguage);
+            break;
           default:
             text = 'no supported service';
         }

@@ -4,7 +4,7 @@
 > 🧨 💥 🎉 本项目是一个命令行工具，但非常荣幸得到了很多朋友的支持，也给我了很大的鼓舞，因此，我基于它制作了一款客户端工具，让大家能够更加方便地使用，也方便一部分不熟悉代码配置的朋友也能使用该工具。
 > 
 > 欢迎大家移步 [video-subtitle-master](https://github.com/buxuku/video-subtitle-master) 以获得更加便捷的使用体验
-> ![image](https://github.com/buxuku/VideoSubtitleGenerator/assets/7866330/8dc48869-2489-46e3-8691-f30f00b24e70)
+> ![image](https://github.com/buxuku/video-subtitle-master/raw/main/resources/preview.png)
 
 
 做这个小工具的初衷：
@@ -36,6 +36,7 @@
 - 支持火山引擎翻译
 - 支持百度翻译
 - 支持 deeplx 翻译 （批量翻译容易存在被限流的情况）
+- 支持 ollama 翻译
 - 自定义字幕文件名，方便兼容不同的播放器挂载字幕识别
 - 自定义翻译后的字幕文件内容，纯翻译结果，原字幕+翻译结果
 - 项目集成 `whisper.cpp`， 它对 apple silicon 进行了优化，有较快的生成速度
@@ -84,11 +85,17 @@ yarn install
 
 `VOLC_` 开头的为火山翻译的配置
 
+`OLLAMA_` 开头的为 ollama 翻译的配置
+
 ```shell
 BAIDU_KEY=2023120600190xxxx
 BAIDU_SECRET=PIbyKjEr1y8u18RZxxxx
 VOLC_KEY=AKLTMDUwZjY4MTZkNTFmN4M3ZjlkMzlmYzAzMTdlMDExxxx
 VOLC_SECRET=T0dRMllUUmpPREUzWWpjNE5HVm2Zamt4TlRObU9EUm1ORFk0T1dGbExxxx==
+
+OLLAMA_API_URL=http://localhost:11434
+OLLAMA_MODEL_NAME=llama3
+OLLAMA_PROMPT=Please translate the following content from ${sourceLanguage} to ${targetLanguage}, only return the translation result can be. \n ${content}
 ```
 
 4️⃣ 其余的配置在 `config.js` 文件中进行配置，每条配置均的详细的注释
@@ -124,6 +131,7 @@ export const supportedService = {
     baidu: Symbol.for('baidu'),
     volc: Symbol.for('volc'),
     deeplx: Symbol.for('deeplx'),
+    ollama: Symbol.for('ollama'),
 };
 
 // 当前使用的翻译服务商，如果不配置，则不执行翻译流程
@@ -171,6 +179,7 @@ export const translateServiceProvider = supportedService.volc;
 - supportedService.volc 火山翻译
 - supportedService.baidu 百度翻译
 - supportedService.deeplx deeplx 翻译
+- supportedService.ollama ollama 翻译
 
 #### 翻译结果的配置
 

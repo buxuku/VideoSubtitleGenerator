@@ -29,10 +29,11 @@ export const supportedService = {
   baidu: Symbol.for('baidu'),
   volc: Symbol.for('volc'),
   deeplx: Symbol.for('deeplx'),
+  ollama: Symbol.for('ollama'),
 };
 
 // 当前使用的翻译服务商，如果不配置，则不执行翻译流程
-export const translateServiceProvider = supportedService.volc;
+export const translateServiceProvider = supportedService.ollama;
 
 // 翻译结果字幕文件内容配置
 export const contentTemplateRuleMap = {

@@ -10,6 +10,8 @@ config();
 
 const { log, error } = console;
 
+const SUPPORTED_VIDEO_FORMATS = ["mp4", "avi", "mov", "mkv", "flv", "wmv", "webm", "m4a"];
+
 await installWhisper();
 fs.readdir(videoDir, async (err, files) => {
   if (err) {
@@ -18,10 +20,11 @@ fs.readdir(videoDir, async (err, files) => {
   }
   for (let i = 0; i <= files.length - 1; i++) {
     const file = files[i];
-    if (file.endsWith('.mp4')) {
+    const fileExtension = file.split('.').pop().toLowerCase();
+    if (SUPPORTED_VIDEO_FORMATS.includes(fileExtension)) {
       log('开始处理文件：', file);
       try {
-        const fileName = file.split('.')[0];
+        const fileName = file.substring(0, file.lastIndexOf('.'));
         const wavFile = `${videoDir}/${fileName}.wav`;
         const srtFile = `${renderFilePath(sourceSrtSaveName, fileName)}`;
         await extractAudio(`${videoDir}/${file}`, `${wavFile}`);

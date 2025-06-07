@@ -239,3 +239,5 @@ export const contentTemplateRule = contentTemplateRuleMap.onlyTranslate;
 5️⃣ 配置好该文件之后，执行 `yarn start` 或者 `npm start`, 首次执行会下载 `whisper.cpp` 和配置的对应的模型文件，会比较慢一些。下次执行将会跳过该流程
 
 如果在使用过程中遇到啥问题，可以提 Issue 或者通过 Discussions 进行讨论
+
+[![Powered by DartNode](https://dartnode.com/branding/DN-Open-Source-sm.png)](https://dartnode.com "Powered by DartNode - Free VPS for Open Source")
